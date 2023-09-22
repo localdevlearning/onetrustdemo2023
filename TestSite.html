@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!--<script type="text/javascript">
+         // uncomment for customGeolocation        
+          var OneTrust = {        
+              geolocationResponse: {        
+                  stateCode: 'CA',        
+                  countryCode: 'US'       
+         //         regionCode: 'EU', // Optional parameter        
+              }        
+          };    
+         </script>-->
+      <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="2b290b4f-7dba-4e9b-b52f-ba093782b273-test"></script>
+      <script type="text/javascript">
+         function OptanonWrapper() { 
+             window.OneTrust.OnConsentChanged(function () {
+                     console.log("success")
+                 });
+             // window.OneTrust.UpdateConsent('Category','C0004:0');
+                 // window.Optanon.setGeoLocation("US","CA");
+         }
+      </script>
+      <!-- OneTrust Cookies Consent Notice end for my.onetrust.com -->
+      <title>OneTrust</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600&amp;subset=latin-ext" rel="stylesheet">
+      <!-- CSS -->
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <style>
+      </style>
+      <img src="https://www.onetrust.com/wp-content/themes/onetrust/images/OneTrustLogo.svg" alt="OneTrust logo" id="logoImage" width="200" height="100">
+      <center>
+         <h1>Test Page</h1>
+      </center>
+      <script type="text/plain" class="optanon-category-C0004">
+         document.cookie = "LinkedIn Cookie = username";
+      </script>
+      <script type="text/plain" class="optanon-category-C0004">
+         document.cookie = "Targeting cookie  = Targeting Cookie 1";
+      </script>
+      <script type="text/plain" class="optanon-category-C0003">
+         document.cookie = "Functional cookie = Functional Cookie 1";
+      </script>
+      <script type="text/plain" class="optanon-category-C0002">
+         document.cookie = "Performance cookie = Performance Cookie 1";
+      </script>
+      <!-- OneTrust Cookies Settings button start -->
+      <a class="ot-sdk-show-settings">Cookie Settings</a>
+      <a onclick="OneTrust.ToggleInfoDisplay()">Cookie Settings</a>
+      <!-- OneTrust Cookies Settings button end -->
+      <button onclick="OneTrust.UpdateConsent('Category','C0004:0')">remove targetting</button>
+      <div id="ot-sdk-cookie-policy"></div>
+      <button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button>
+      <!-- OneTrust Cookies Settings button start -->
+      <!--<a class="ot-sdk-show-settings">Link for cookie settings</a>-->
+      <!-- OneTrust Cookies Settings button end -->
+      <!--   OneTrust Cookies List start 
+         <div id="ot-sdk-cookie-policy"></div>
+          OneTrust Cookies List end -->
+      <!--    <style>-->
+      <!--        #onetrust-pc-sdk #filter-btn-handler {-->
+      <!--display: none;-->
+      <!--}-->
+      <!--#onetrust-pc-sdk .ot-switch::before {-->
+      <!--content: "Inactive";-->
+      <!--position: absolute;-->
+      <!--bottom: 4px;-->
+      <!--right: 55px;-->
+      <!--color: #949494-->
+      <!--}-->
+      <!--#onetrust-pc-sdk .ot-tgl input:checked+.ot-switch:before {-->
+      <!--content: "Active";-->
+      <!--color: #335dca-->
+      <!--}-->
+      <!--    </style>-->
+   </body>
+</html>
