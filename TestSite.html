@@ -120,3 +120,49 @@ function App({ Component, pageProps }: AppProps) {
 <script type="text/plain" class="optanon-category-C000X">
 document.cookie = "TestCookie" + "=" + "Test_CookieHere!";
 </script>
+
+=================
+
+<!-- mapping the OT cookie categories to Foleon cookie categories-->
+<script type="text/javascript">
+  function OptanonWrapper() {
+​
+    //OneTrust Cookies On Consent Listener to update the Foleon Cookie consent manager  
+    OneTrust.OnConsentChanged(function(e) {
+
+        const statistics = e.detail.includes('C0003') ? 1 : 0
+        // when marketing and social media cookies are accepted, we enable the Foleon marketing cookie
+        const combinedMarketingCookies = ["C0004", "C0005"] 
+        const marketing = combinedMarketingCookies.every(value => {
+            return e.detail.includes(value);
+        }) ? 1: 0;
+        // when both functional and preferences cookies are accepted, we enable the Foleon preferences cookie.
+        const combinedPreferenceCookies = ["C0001", "C0002"] 
+        const preferences = combinedPreferenceCookies.every(value => {
+            return e.detail.includes(value);
+        }) ? 1: 0;
+​
+        // Updating the Foleon Consent Manager.
+        // set default values when the API is not yet available
+        if(typeof CookieConsentAPI !== 'undefined') {
+​
+            CookieConsentAPI.update({
+            statistics: statistics || 0,
+            marketing: marketing || 0,
+            preferences: preferences || 1
+​
+            })
+​
+            CookieConsentAPI.save()
+​
+            } else {
+            // save new values after (updated) consent
+            localStorage.setItem("cc_settings", JSON.stringify({
+            statistics: statistics || 0,
+            marketing: marketing || 0,
+            preferences: preferences || 1
+            }))
+            }
+    })
+  }
+</script>
