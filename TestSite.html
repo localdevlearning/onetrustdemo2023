@@ -85,3 +85,31 @@
 =========
 ?otreset=true&otpreview=false&otgeo=gb
 adobe.optIn.permissions
+
+=========
+
+function App({ Component, pageProps }: AppProps) {
+ const [injectScript, setInjectScript] = useState(false);
+ useEffect(() => {
+  if (typeof window !== 'undefined' && !window.OptanonWrapper) {
+   window.OptanonWrapper = () => {
+    window.OneTrust.OnConsentChanged(() => {
+      if (window.OptanonActiveGroups.indexOf('C0004') > -1) {
+        setInjectScript(true);
+      }
+    });
+   };
+  }
+
+  if (typeof window !== 'undefined' &&
+   document.cookie.replace(/(?:(?:^|.*;\s*)OptanonConsent\s*=\s*([^;]*).*$)|^.*$/, '$1').indexOf('C0004') > -1) {
+    setInjectScript(true);
+   }
+  }, []);
+
+ return (
+   <GTMProvider state={{ injectScript, ...gtmParams }}>
+    <Component {...pageProps} />
+   </GTMProvider>
+ );
+}
