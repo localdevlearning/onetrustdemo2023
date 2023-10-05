@@ -1,186 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!--<script type="text/javascript">
-         // uncomment for customGeolocation        
-          var OneTrust = {        
-              geolocationResponse: {        
-                  stateCode: 'CA',        
-                  countryCode: 'US'       
-         //         regionCode: 'EU', // Optional parameter        
-              }        
-          };    
-         </script>-->
-      <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="2b290b4f-7dba-4e9b-b52f-ba093782b273-test"></script>
-      <!--<script src="https://assets.adobedtm.com/f597357f7129/5afc37540ae6/launch-536fb815ff1c-development.min.js" async></script>-->
-        <script src="https://assets.adobedtm.com/f597357f7129/656d4edad8c4/launch-8c1b58c4187b-development.min.js" async></script>
-      <script type="text/javascript">
-         function OptanonWrapper() { 
-             window.OneTrust.OnConsentChanged(function () {
-                     console.log("success")
-                 });
-             // window.OneTrust.UpdateConsent('Category','C0004:0');
-                 // window.Optanon.setGeoLocation("US","CA");
-         }
-      </script>
-      <!-- OneTrust Cookies Consent Notice end for my.onetrust.com -->
-      <title>OneTrust</title>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600&amp;subset=latin-ext" rel="stylesheet">
-      <!-- CSS -->
-      <link rel="stylesheet" href="styles.css">
-   </head>
-   <body>
-      <style>
-      </style>
-      <img src="https://www.onetrust.com/wp-content/themes/onetrust/images/OneTrustLogo.svg" alt="OneTrust logo" id="logoImage" width="200" height="100">
-      <center>
-         <h1>Test Page</h1>
-      </center>
-      <script type="text/plain" class="optanon-category-C0004">
-         document.cookie = "LinkedIn Cookie = username";
-      </script>
-      <script type="text/plain" class="optanon-category-C0004">
-         document.cookie = "Targeting cookie  = Targeting Cookie 1";
-      </script>
-      <script type="text/plain" class="optanon-category-C0003">
-         document.cookie = "Functional cookie = Functional Cookie 1";
-      </script>
-      <script type="text/plain" class="optanon-category-C0002">
-         document.cookie = "Performance cookie = Performance Cookie 1";
-      </script>
-      <!-- OneTrust Cookies Settings button start -->
-      <a class="ot-sdk-show-settings">Cookie Settings</a>
-      <a onclick="OneTrust.ToggleInfoDisplay()">Cookie Settings</a>
-      <!-- OneTrust Cookies Settings button end -->
-      <button onclick="OneTrust.UpdateConsent('Category','C0004:0')">remove targetting</button>
-      <div id="ot-sdk-cookie-policy"></div>
-      <button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button>
-      <!-- OneTrust Cookies Settings button start -->
-      <!--<a class="ot-sdk-show-settings">Link for cookie settings</a>-->
-      <!-- OneTrust Cookies Settings button end -->
-      <!--   OneTrust Cookies List start 
-         <div id="ot-sdk-cookie-policy"></div>
-          OneTrust Cookies List end -->
-      <!--    <style>-->
-      <!--        #onetrust-pc-sdk #filter-btn-handler {-->
-      <!--display: none;-->
-      <!--}-->
-      <!--#onetrust-pc-sdk .ot-switch::before {-->
-      <!--content: "Inactive";-->
-      <!--position: absolute;-->
-      <!--bottom: 4px;-->
-      <!--right: 55px;-->
-      <!--color: #949494-->
-      <!--}-->
-      <!--#onetrust-pc-sdk .ot-tgl input:checked+.ot-switch:before {-->
-      <!--content: "Active";-->
-      <!--color: #335dca-->
-      <!--}-->
-      <!--    </style>-->
-   </body>
-</html>
+Querying nested content fragments using GraphQL in Adobe Experience Manager (AEM) can impact performance, and it's important to consider some key factors:
 
-=========
-?otreset=true&otpreview=false&otgeo=gb
-adobe.optIn.permissions
+1. *Depth of Nesting:* The more deeply nested your content fragments are, the more complex and resource-intensive your GraphQL queries can become. Deeply nested queries can lead to multiple database calls and a higher load on the server, potentially slowing down response times.
 
-=========
+2. *Number of Queries:* Querying nested content fragments often involves multiple sub-queries or joins to retrieve related data. Each additional query increases the load on the server and can result in slower performance, especially when dealing with large datasets.
 
-function App({ Component, pageProps }: AppProps) {
- const [injectScript, setInjectScript] = useState(false);
- useEffect(() => {
-  if (typeof window !== 'undefined' && !window.OptanonWrapper) {
-   window.OptanonWrapper = () => {
-    window.OneTrust.OnConsentChanged(() => {
-      if (window.OptanonActiveGroups.indexOf('C0004') > -1) {
-        setInjectScript(true);
-      }
-    });
-   };
-  }
+3. *Data Fetching Strategy:* The way you fetch data can significantly impact performance. Using GraphQL's `@defer` directive or batching queries can help mitigate performance issues by fetching data in a more optimized manner. Properly optimized resolvers and data retrieval methods are essential.
 
-  if (typeof window !== 'undefined' &&
-   document.cookie.replace(/(?:(?:^|.*;\s*)OptanonConsent\s*=\s*([^;]*).*$)|^.*$/, '$1').indexOf('C0004') > -1) {
-    setInjectScript(true);
-   }
-  }, []);
+4. *Caching:* AEM provides caching mechanisms that can help alleviate performance issues. Leveraging caching effectively can reduce the need to fetch data from the underlying repository for each query, improving response times.
 
- return (
-   <GTMProvider state={{ injectScript, ...gtmParams }}>
-    <Component {...pageProps} />
-   </GTMProvider>
- );
-}
+5. *Pagination and Filtering:* Implement pagination and filtering in your GraphQL queries to limit the amount of data retrieved in a single request. This can prevent excessive database queries and improve performance when dealing with large content sets.
+
+6. *Server Resources:* Ensure that your AEM server has sufficient resources (CPU, memory, and disk space) to handle the increased load when querying nested content fragments. Monitoring server performance and scaling resources as needed is crucial.
+
+7. *Query Complexity:* Analyze the complexity of your GraphQL queries. Highly complex queries can strain the server, so optimizing and simplifying your queries is important for good performance.
+
+8. *Caching and Indexing:* AEM allows for the configuration of caches and indexes for GraphQL queries. Properly configuring and maintaining these can have a significant impact on performance.
+
+9. *Throttling and Rate Limiting:* Implementing throttling and rate limiting for GraphQL requests can prevent abuse and ensure that the server doesn't get overwhelmed with a high volume of requests.
+
+10. *Monitoring and Profiling:* Continuously monitor the performance of your GraphQL queries in AEM. Profiling tools can help identify bottlenecks and areas for optimization.
+
+In summary, querying nested content fragments using GraphQL in AEM can impact performance, but with careful planning, optimization, and monitoring, you can mitigate these issues and provide a responsive user experience. Consider the structure of your queries, server resources, and caching strategies to achieve better performance.
 
 
-=========
 
-<script type="text/plain" class="optanon-category-C000X">
-document.cookie = "TestCookie" + "=" + "Test_CookieHere!";
-</script>
 
-=================
 
-<script>
-if (!window.localStorage.getItem('cc_settings')) {
-window.localStorage.setItem('cc_settings', 
-JSON.stringify({"statistics":0, "marketing": 0, "preferences": 1}));
-}
-</script>
-<!-- Add your OneTrust Cookies Consent SDK script here, or replace the values with the ones from your application -->
-<script
-src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-type="text/javascript"
-charset="UTF-8"
-data-domain-script="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-></script>
-​
-<!-- mapping the OT cookie categories to Foleon cookie categories-->
-<script type="text/javascript">
-function OptanonWrapper() {
-​
-//OneTrust Cookies On Consent Listener to update the Foleon Cookie consent manager 
-OneTrust.OnConsentChanged(function(e) {
+Creating a great PowerPoint presentation to showcase GraphQL capabilities in Adobe Experience Manager (AEM) requires careful planning and execution. Here are the steps to prepare an effective presentation:
 
-const statistics = e.detail.includes('C0003') ? 1 : 0
-// when marketing and social media cookies are accepted, we enable the Foleon marketing cookie
-const combinedMarketingCookies = ["C0004", "C0005"] 
-const marketing = combinedMarketingCookies.every(value => {
-return e.detail.includes(value);
-}) ? 1: 0;
-// when both functional and preferences cookies are accepted, we enable the Foleon preferences cookie.
-const combinedPreferenceCookies = ["C0001", "C0002"] 
-const preferences = combinedPreferenceCookies.every(value => {
-return e.detail.includes(value);
-}) ? 1: 0;
-​
-// Updating the Foleon Consent Manager.
-// set default values when the API is not yet available
-if(typeof CookieConsentAPI !== 'undefined') {
-​
-CookieConsentAPI.update({
-statistics: statistics || 0,
-marketing: marketing || 0,
-preferences: preferences || 1
-​
-})
-​
-CookieConsentAPI.save()
-​
-} else {
-// save new values after (updated) consent
-localStorage.setItem("cc_settings", JSON.stringify({
-statistics: statistics || 0,
-marketing: marketing || 0,
-preferences: preferences || 1
-​
-}))
-​
-}
-​
-})
+1. *Define Your Audience:*
+   - Understand who will be attending your presentation. Are they developers, business stakeholders, or a mix of both? Tailor your content accordingly.
 
-}
-</script>
+2. *Set Clear Objectives:*
+   - Determine the key messages you want to convey. What are the benefits of using GraphQL in AEM? What problems does it solve?
+
+3. *Gather Content:*
+   - Collect relevant information, data, and examples that demonstrate the capabilities of GraphQL in AEM. Include real-world use cases, if possible.
+
+4. *Create an Outline:*
+   - Structure your presentation with a clear introduction, main content sections, and a conclusion. An outline helps you organize your thoughts.
+
+5. *Design Slides:*
+   - Use a clean and consistent design with a professional template. Ensure readability with appropriate fonts and color schemes.
+
+6. *Introduction:*
+   - Start with a compelling opening slide that grabs the audience's attention. Introduce yourself and provide an overview of what the presentation will cover.
+
+7. *Explain GraphQL:*
+   - Begin by explaining what GraphQL is and how it differs from REST APIs. Use simple language and visuals to make it easy to understand.
+
+8. *GraphQL in AEM:*
+   - Dive into how GraphQL is implemented in AEM. Explain the architecture and components involved.
+
+9. *Benefits and Use Cases:*
+   - Highlight the advantages of using GraphQL in AEM, such as efficient data retrieval, flexibility, and reduced over-fetching. Present real-world use cases to illustrate these benefits.
+
+10. *Demo:*
+    - Include a live or recorded demo to showcase GraphQL queries in action within AEM. Walk the audience through the process step by step.
+
+11. *Best Practices:*
+    - Provide best practices for implementing GraphQL in AEM, including schema design, security considerations, and error handling.
+
+12. *Performance and Scalability:*
+    - Discuss how GraphQL impacts performance and scalability in AEM. Explain strategies for optimizing queries and caching.
+
+13. *Case Studies:*
+    - Share success stories or case studies of organizations that have leveraged GraphQL in AEM to achieve specific goals or solve problems.
+
+14. *Challenges and Solutions:*
+    - Address any challenges or limitations of using GraphQL in AEM and offer solutions or workarounds.
+
+15. *Q&A Session:*
+    - Reserve time for questions and answers. Encourage the audience to ask questions for clarification.
+
+16. *Conclusion:*
+    - Summarize the key takeaways from your presentation. Reiterate the benefits of using GraphQL in AEM.
+
+17. *Additional Resources:*
+    - Provide references, links, or recommended reading materials for those who want to learn more about GraphQL and AEM.
+
+18. *Practice and Rehearse:*
+    - Practice your presentation multiple times to ensure a smooth delivery. Time yourself to stay within the allocated presentation duration.
+
+19. *Feedback and Review:*
+    - Seek feedback from colleagues or mentors to improve the content and delivery of your presentation.
+
+20. *Finalize and Save:*
+    - Save your PowerPoint presentation in a format that's compatible with the presentation equipment you'll be using.
+
+Remember to engage with your audience, be enthusiastic about the topic, and use visuals effectively to convey your message. A well-prepared and well-delivered presentation can effectively showcase the capabilities of GraphQL in Adobe Experience Manager.
