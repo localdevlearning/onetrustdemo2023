@@ -1,0 +1,7 @@
+Personalized Hero Banner: Customize the hero banner on the homepage for different audience.
+Dynamic Content Swapping: Swap out specific content blocks, show different product recommendations to different audience.
+Customized Call-to-Action Buttons: Swap out specific URL & messaging of CTA for different audience.
+Form Optimization : Adjust field placements, labels, and styles to improve user experience and increase conversion rates.
+Localization and Language Targeting: Modify text and images to cater to users from different regions and languages.
+Device-Specific Content Adjustments: Demonstrate how you can optimize content for different devices using VEC.
+Personalized Exit Intent Popups: Offer a discount code to those who are about to leave without making a purchase.
