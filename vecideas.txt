@@ -5,3 +5,5 @@ Form Optimization : Adjust field placements, labels, and styles to improve user 
 Localization and Language Targeting: Modify text and images to cater to users from different regions and languages.
 Device-Specific Content Adjustments: Demonstrate how you can optimize content for different devices using VEC.
 Personalized Exit Intent Popups: Offer a discount code to those who are about to leave without making a purchase.
+Holiday Greetings: Display content specific to an upcoming event or holiday using VEC [language/region specific].
+Content for Logged-In Users: Showcase personalized content or promotions for users who are logged in.
